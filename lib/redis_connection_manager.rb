@@ -1,0 +1,2 @@
+class RedisConnectionManager
+end
