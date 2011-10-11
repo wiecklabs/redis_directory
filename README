@@ -1,0 +1,24 @@
+====== RedisConnectionManager
+
+Connects to a central database with the following:
+
+  "servers" => {
+    "sessions" => [ "localhost" ],
+    "queue" => [ "localhost" ],
+    "cache" => [ "localhost" ]
+  }
+
+A: 0 on queue
+B: 0 on cache, 0 sessions & 1 queue
+
+
+sessions: 1, 2, 3, 4, 5
+cleat: 1, X, X, X, 5
+
+"sessions" => {
+  "trioptimum" => 23,
+  "bnl" => 4,
+  "acme" => 5
+}
+
+connection-name: "trioptimum"

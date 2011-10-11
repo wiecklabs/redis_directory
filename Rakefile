@@ -3,13 +3,14 @@ require "rubygems"
 require "bundler/setup"
 require "rake"
 require "rake/testtask"
-require "rake/gempackagetask"
+# require "rake/gempackagetask"
 
 task :default => :test
 
 Rake::TestTask.new(:test) do |t|
   t.libs << "test"
   t.test_files = FileList["test/**/*_test.rb"]
+  t.verbose = true
 end
 
 def gemspec
@@ -19,9 +20,9 @@ def gemspec
   end
 end
 
-Rake::GemPackageTask.new(gemspec) do |package|
-  package.gem_spec = gemspec
-end
+# Rake::GemPackageTask.new(gemspec) do |package|
+#   package.gem_spec = gemspec
+# end
 
 desc "Validate gemspec"
 task :gemspec do

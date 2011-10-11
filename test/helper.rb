@@ -1,4 +1,4 @@
 ENV["ENVIRONMENT"] = "test"
 
-require "minitest"
-require "../lib/redis_connection_manager"
+require "minitest/autorun"
+require File.dirname(__FILE__) + "/../lib/redis_connection_manager"
