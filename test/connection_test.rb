@@ -112,10 +112,10 @@ class ConnectionTest < MiniTest::Unit::TestCase
   end
   
   # In order to use as few database numbers as possible, and again, allowing you
-  # to tune Redis configuration settings like +databases+, database numbers may
-  # not be consistent across services/clusters for a given client/name. This is
-  # especially true if not all clients consume all services, as the example below
-  # demonstrates.
+  # to tune Redis configuration settings like +databases+ on a per service/cluster
+  # basis, database numbers may not be consistent across services/clusters for a
+  # given client/name. This is especially true if not all clients consume all services,
+  # as the example below demonstrates.
   def test_database_ids_are_unbalanced
     bnl     = @directory.reserve("cache", "bnl")
     hacker  = @directory.reserve("cache", "trioptimum")
