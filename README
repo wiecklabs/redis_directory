@@ -11,7 +11,7 @@ database, then your connection might look like this:
   require "redis/distributed"
 
   # The ACME Corp database is #27
-  cache = Redis::Distributed.new "redis://redis.example:4400/27", "redis://redis.example:4401/27"
+  cache = Redis::Distributed.new %w( redis://redis.example:4400/27 redis://redis.example:4401/27 )
 
 Redis::Directory uses a centralized Redis database to store the
 connection information so you don't have to remember "magic numbers" for
