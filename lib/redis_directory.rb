@@ -27,7 +27,6 @@ class Redis::Directory
   # You must provide the +connection_string+ to the directory server.
   def initialize(connection_string)
     @redis = Redis.new(connection_string)
-    @connections = []
   end
   
   def services
@@ -62,13 +61,8 @@ class Redis::Directory
     db = reserve(service_name, connection_name)
     raise ReservationError.new(self, service_name, connection_name) if db.nil?
     connection = Redis::Distributed.new(services[service_name].map { |server| "#{server}/#{db}" })
-    @connections << connection
     connection.set("connection-name", connection_name)
     connection
-  end
-  
-  def connections
-    @connections
   end
   
   def redis
