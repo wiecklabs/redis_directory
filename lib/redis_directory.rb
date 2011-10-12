@@ -24,9 +24,9 @@ class Redis::Directory
     end
   end
   
-  # You must provide the +connection_string+ to the directory server.
-  def initialize(connection_string)
-    @redis = Redis.new(connection_string)
+  # You must provide the +connection_options+ to the directory server.
+  def initialize(connection_options)
+    @redis = Redis.connect(connection_options)
   end
   
   def services
@@ -64,7 +64,22 @@ class Redis::Directory
   def get(service_name, connection_name)
     db = reserve(service_name, connection_name)
     raise ReservationError.new(self, service_name, connection_name) if db.nil?
-    connection = Redis::Distributed.new(services[service_name].map { |server| "redis://#{server}/#{db}" })
+    
+    connection_list = services[service_name].map do |server|
+      if server =~ /^redis\:\/\//
+        "#{server}/#{db}"
+      else
+        "redis://#{server}/#{db}"
+      end
+    end
+    connection = nil
+    
+    if connection_list.size == 1
+      connection = Redis.connect(:url => connection_list.first)
+    else
+      connection = Redis::Distributed.new(connection_list)
+    end
+    
     connection.set("connection-name", connection_name)
     connection
   end

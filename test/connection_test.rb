@@ -3,12 +3,12 @@ require File.dirname(__FILE__) + "/helper"
 class ConnectionTest < MiniTest::Unit::TestCase
 
   def setup
-    @directory = Redis::Directory.new(:host => (ENV["REDIS_DIRECTORY"] || "localhost"))
+    @directory = Redis::Directory.new(:url => (ENV["REDIS_DIRECTORY"] || "redis://localhost"))
     
     @redis = @directory.redis
-    @redis.hset Redis::Directory::SERVICES_KEY, "cache", [ "localhost" ].to_json
-    @redis.hset Redis::Directory::SERVICES_KEY, "sessions", [ "localhost" ].to_json
-    @redis.hset Redis::Directory::SERVICES_KEY, "queue", [ "localhost" ].to_json
+    @redis.hset Redis::Directory::SERVICES_KEY, "cache", [ "redis://localhost" ].to_json
+    @redis.hset Redis::Directory::SERVICES_KEY, "sessions", [ "redis://localhost" ].to_json
+    @redis.hset Redis::Directory::SERVICES_KEY, "queue", [ "redis://localhost" ].to_json
   end
   
   def teardown
