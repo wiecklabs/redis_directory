@@ -15,7 +15,7 @@ end
 
 def gemspec
   @gemspec ||= begin
-    file = File.expand_path("redis_connection_manager.gemspec", __FILE__)
+    file = File.expand_path("redis_directory.gemspec", __FILE__)
     eval(File.read(file), binding, file)
   end
 end

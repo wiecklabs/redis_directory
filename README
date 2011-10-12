@@ -1,24 +1,24 @@
-====== RedisConnectionManager
+====== Redis::Directory
 
-Connects to a central database with the following:
+Redis::Directory assumes a Redis installation running on a default
+port and database 0 that will contain connection information for various
+other Redis databases. For example, if you were using a Redis database to
+store the content of cached pages, and this was running on a cluster of
+two Redis instances, with multiple applications connecting partitioned by
+database, then your connection might look like this:
 
-  "servers" => {
-    "sessions" => [ "localhost" ],
-    "queue" => [ "localhost" ],
-    "cache" => [ "localhost" ]
-  }
+  require "redis"
+  require "redis/distributed"
 
-A: 0 on queue
-B: 0 on cache, 0 sessions & 1 queue
+  # The ACME Corp database is #27
+  cache = Redis::Distributed.new "redis://redis.example:4400/27", "redis://redis.example:4401/27"
 
+Redis::Directory uses a centralized Redis database to store the
+connection information so you don't have to remember "magic numbers" for
+each client/database mapping, and can easily update port-numbers/hostnames,
+cluster-members as necessary. The same connection with
+Redis::Directory would look like this:
 
-sessions: 1, 2, 3, 4, 5
-cleat: 1, X, X, X, 5
-
-"sessions" => {
-  "trioptimum" => 23,
-  "bnl" => 4,
-  "acme" => 5
-}
-
-connection-name: "trioptimum"
+  require "redis_directory"
+  
+  cache = Redis::Directory.new("redis.example").connect("cache", "acme")
