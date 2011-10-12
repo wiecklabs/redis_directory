@@ -21,4 +21,4 @@ Redis::Directory would look like this:
 
   require "redis_directory"
   
-  cache = Redis::Directory.new("redis.example").connect("cache", "acme")
+  cache = Redis::Directory.new("redis.example").get("cache", "acme")
