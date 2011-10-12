@@ -35,6 +35,8 @@ EOF
 
   s.author          = "Sam Smoot"
   s.email           = "ssmoot@gmail.com"
+  s.homepage        = "https://github.com/wiecklabs/redis_directory"
+  s.license         = "MIT"
   
   s.has_rdoc = true
   s.rdoc_options = [ "--inline-source", "--line-numbers", "--title", "Redis Directory: A database connection manager for Redis", "README", "MIT-LICENSE", "lib" ]
