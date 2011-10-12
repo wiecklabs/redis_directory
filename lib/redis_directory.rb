@@ -51,8 +51,12 @@ class Redis::Directory
   def reserve(service_name, connection_name)
     new_db = nil
     # redis.multi do
-      new_db = next_db(service_name)
-      redis.hset("#{service_name}-service", connection_name, new_db)
+      if redis.hexists("#{service_name}-service", connection_name)
+        new_db = redis.hget("#{service_name}-service", connection_name)
+      else
+        new_db = next_db(service_name)
+        redis.hset("#{service_name}-service", connection_name, new_db)
+      end
     # end
     new_db
   end

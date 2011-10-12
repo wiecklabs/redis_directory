@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name            = "redis_directory"
-  s.version         = "1.0.1"
+  s.version         = "1.0.2"
   s.platform        = Gem::Platform::RUBY
   s.summary         = "Redis Directory for retriving/storing redis connections in a central database."
 
