@@ -60,7 +60,7 @@ class Redis::Directory
   def get(service_name, connection_name)
     db = reserve(service_name, connection_name)
     raise ReservationError.new(self, service_name, connection_name) if db.nil?
-    connection = Redis::Distributed.new(services[service_name].map { |server| "#{server}/#{db}" })
+    connection = Redis::Distributed.new(services[service_name].map { |server| "redis://#{server}/#{db}" })
     connection.set("connection-name", connection_name)
     connection
   end
