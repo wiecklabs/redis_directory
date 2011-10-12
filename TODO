@@ -1,0 +1,3 @@
+* Redis::Directory#reserve should really be atomic, but Redis#multi results in bad-behavior for me (it doesn't properly read the existing "services" key)
+* Should add an additional check so that when you try to reserve a database that already exists, the name is compared and an error thrown if it doesn't match the requested name
+* A redis-directory executable wrapping redis-cli to add/remove services and databases (with help) would be nice
