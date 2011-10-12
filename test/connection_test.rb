@@ -72,8 +72,6 @@ class ConnectionTest < MiniTest::Unit::TestCase
     shodan  = @directory.reserve("sessions", "trioptimum")
 
     refute_equal hacker, shodan
-    
-    p @redis.info
   end
   
 end
