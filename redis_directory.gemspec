@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name            = "redis_directory"
-  s.version         = "0.1"
+  s.version         = "1.0"
   s.platform        = Gem::Platform::RUBY
   s.summary         = "Redis Directory for retriving/storing redis connections in a central database."
 
@@ -29,10 +29,13 @@ Redis::Directory would look like this:
   cache = Redis::Directory.new("redis.example").connect("cache", "acme")
 EOF
 
-  s.files           = Dir[ "lib/**/*", "test/**/*", "redis_directory.gemspec", "Rakefile" ]
+  s.files           = Dir[ "README", "lib/**/*", "test/**/*", "redis_directory.gemspec", "Rakefile" ]
   s.require_path    = "lib"
   s.test_files      = Dir["test/**/*_test.rb"]
 
   s.author          = "Sam Smoot"
   s.email           = "ssmoot@gmail.com"
+  
+  s.has_rdoc = true
+  s.rdoc_options = [ "--inline-source", "--line-numbers", "--title", "Redis Directory: A database connection manager for Redis", "README", "MIT-LICENSE", "lib" ]
 end

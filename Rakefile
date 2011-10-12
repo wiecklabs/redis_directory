@@ -1,9 +1,7 @@
-require "pathname"
-require "rubygems"
-require "bundler/setup"
 require "rake"
+require "rake/clean"
 require "rake/testtask"
-# require "rake/gempackagetask"
+require "rake/rdoctask"
 
 task :default => :test
 
@@ -13,18 +11,16 @@ Rake::TestTask.new(:test) do |t|
   t.verbose = true
 end
 
-def gemspec
-  @gemspec ||= begin
-    file = File.expand_path("redis_directory.gemspec", __FILE__)
-    eval(File.read(file), binding, file)
-  end
+CLEAN.include ["*.gem", "rdoc"]
+RDOC_OPTS = [ "--quiet", "--inline-source", "--line-numbers", "--title", "Redis Directory: A database connection manager for Redis", "--main", "README" ]
+
+Rake::RDocTask.new do |rdoc|
+  rdoc.rdoc_dir = "rdoc"
+  rdoc.options += RDOC_OPTS
+  rdoc.rdoc_files.add %w"README MIT-LICENSE lib/redis_directory.rb"
 end
 
-# Rake::GemPackageTask.new(gemspec) do |package|
-#   package.gem_spec = gemspec
-# end
-
-desc "Validate gemspec"
-task :gemspec do
-  gemspec.validate
+desc "Package redis_directory"
+task :package do
+  sh %{gem build redis_directory.gemspec}
 end
