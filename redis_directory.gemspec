@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name            = "redis_directory"
-  s.version         = "1.0.3"
+  s.version         = "1.0.4"
   s.platform        = Gem::Platform::RUBY
   s.summary         = "Redis Directory for retriving/storing redis connections in a central database."
 
@@ -40,4 +40,8 @@ EOF
   
   s.has_rdoc = true
   s.rdoc_options = [ "--inline-source", "--line-numbers", "--title", "Redis Directory: A database connection manager for Redis", "README", "MIT-LICENSE", "lib" ]
+
+  s.add_dependency "redis"
+  s.add_dependency "minitest" if RUBY_VERSION =~ /1\.8/
+  s.add_dependency "json"
 end
